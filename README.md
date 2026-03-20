@@ -160,7 +160,7 @@ After deployment, outputs include:
 flowchart TB
   A[Internet User Browser] --> B[Route53: jus3.sctp-sandbox.com]
   B --> C[Route53 Alias Record]
-  C --> D[Regional Gateway (S3 website zone id)]
+  C --> D[Regional Gateway\n(S3 website zone id)]
   D --> E[S3 Bucket: jus3.sctp-sandbox.com]
 
   E --> F[Public Access Block OFF]
