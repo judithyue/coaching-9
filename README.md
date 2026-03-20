@@ -67,13 +67,13 @@ terraform init
 ### 3. Review planned changes
 
 ```bash
-terraform plan
+terraform plan -var-file="terraform.tfvars"
 ```
 
 ### 4. Apply configuration
 
 ```bash
-terraform apply
+terraform apply -auo-approve -var-file="terraform.tfvars"
 ```
 
 ### 5. Upload website files
