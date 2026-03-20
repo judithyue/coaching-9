@@ -92,9 +92,9 @@ To enable it, set the following in `terraform.tfvars`:
 
 ```hcl
 # Option A: provide hosted zone ID (recommended if you already have it)
-route53_zone_id       = "Z123456ABCDEFG"           # Your hosted zone ID
+route53_zone_id       = "Z123456ABCDEFG"           # Your local hosted zone ID, which you own
 route53_record_name   = "www.example.com"          # The record to create
-route53_create_alias  = true
+route53_create_alias  = true                       # this is a switch in the code
 
 # Option A+: omit alias zone ID and let the module derive it from the AWS region
 # (works for S3 website endpoints, and uses the region-per-hosted-zone mapping)
@@ -105,8 +105,15 @@ route53_alias_zone_id = ""
 ```
 
 For `ap-southeast-1`, the correct S3 website endpoint hosted zone ID is `Z1LMS91P8CMLE5`.
+# IMPORTANT: These are hosted zone IDs for S3 WEBSITE endpoints (not S3 REST API endpoints)
+S3 website endpoints use different alias one IDs than regular S3 endpoints
+S3 website endpoints (not the regular S3 REST endpoint zone IDs)
+alias_target           = module.s3_static_website.website_domain, will return the AWS s3 service domain name, s3-website-ap-southeast-1.amazonaws.com
+alias_zone_id          = module.s3_static_website.bucket_hosted_zone_id, will return Z3O0J2DXBE1FTB, which is the same as your s3 bucket region
 
-If you prefer not to use an alias record, set `route53_create_alias = false` and provide `route53_records` instead.
+
+
+If you prefer not to use an alias record, set `route53_create_alias = false` and provide `route53_records` instead. by putting false, you can create cname, AAA records to be built in
 
 ## Public Access Configuration
 
