@@ -154,6 +154,35 @@ After deployment, outputs include:
 - `website_url` - The s3 bucket public website url
 - `dns_record_fqdn` - the route53 alias record created for s3 website endpoint
 
+## Architecture Diagram
+
+```mermaid
+flowchart TB
+  A[Internet User Browser] --> B[Route53: jus3.sctp-sandbox.com]
+  B --> C[Route53 Alias Record]
+  C --> D[Regional Gateway (S3 website zone id)]
+  D --> E[S3 Bucket: jus3.sctp-sandbox.com]
+
+  E --> F[Public Access Block OFF]
+  E --> G[Bucket Policy: Allow * / s3:GetObject]
+  E --> H[Website Config: index.html, error.html]
+  E --> I[S3 Website Endpoint: jus3.sctp-sandbox.com.s3-website-ap-southeast-1.amazonaws.com]
+
+  E --> J[Data Store: index.html / error.html]
+  J --> K[Serves Content to Browser]
+
+  style A fill:#e8f4ff,stroke:#1f77b4
+  style B fill:#f4ecff,stroke:#7a31cc
+  style D fill:#fff7cd,stroke:#d9b300,stroke-dasharray: 5 5
+  style E fill:#fff3e0,stroke:#ffa726
+  style F fill:#ffebee,stroke:#e53935
+  style G fill:#e8f5e9,stroke:#2e7d32
+  style H fill:#e3f2fd,stroke:#1976d2
+  style I fill:#ede7f6,stroke:#5e35b1
+  style J fill:#e0f2f1,stroke:#00796b
+  style K fill:#c8e6c9,stroke:#2e7d32
+```
+
 ### Deployment Output Example
 
 ```
