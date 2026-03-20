@@ -105,7 +105,7 @@ route53_alias_zone_id = ""
 ```
 
 For `ap-southeast-1`, the correct S3 website endpoint hosted zone ID is `Z1LMS91P8CMLE5`.
-# IMPORTANT: These are hosted zone IDs for S3 WEBSITE endpoints (not S3 REST API endpoints)
+## IMPORTANT: These are hosted zone IDs for S3 WEBSITE endpoints (not S3 REST API endpoints)
 S3 website endpoints use different alias one IDs than regular S3 endpoints
 S3 website endpoints (not the regular S3 REST endpoint zone IDs)
 alias_target           = module.s3_static_website.website_domain, will return the AWS s3 service domain name, s3-website-ap-southeast-1.amazonaws.com
